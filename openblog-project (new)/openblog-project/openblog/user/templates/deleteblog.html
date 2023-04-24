@@ -1,0 +1,26 @@
+{% extends 'nav.html' %}
+{% block nav %}
+<h1 class="bg-danger text-center" >Confirm delete </h1>
+<div class="container">
+<form action="" method="post">
+    {%csrf_token%}
+    <p>Are you sure to delete this blog</p>
+    <div class="card mt-3 bg-light" style="width: 100%;" >
+        <div class="card-header" >
+           
+         <span>
+                    {{object.date}}
+              </span>
+        </div>
+  {% if object.image.url %}
+  <img class="card-image-top" src="{{object.image.url}}" height="500px" alt="Card image cap">
+  {% endif %}
+<div class="card-body">
+  <h5 class="card-title">{{object.title}}</h5>
+  <p class="card-text">{{object.description}}</p>
+  </div>
+  </div>
+  <p><input type="submit" value="confirm" class="btn btn-success"></p>
+</form>
+</div>
+{% endblock nav %}

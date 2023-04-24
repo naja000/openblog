@@ -1,0 +1,54 @@
+{% extends 'nav.html' %}
+{% block nav %}
+
+<h2 class="bg-primary">profile</h1>
+    {% if messages %}
+      {% for i in messages %}
+       {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+       <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{i}}
+       </div>
+       {%endif%}
+       {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+       <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{i}}
+       </div>
+        {%endif%}
+       {%endfor%}
+      {%endif%}
+        <div class="row">
+       <div class="col">
+        {% if request.user.p_user %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{request.user.p_user.profile_pic.url}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{request.user.first_name}} {{request.user.last_name}}</h5>
+              <p class="card-text">i am {{request.user.p_user.age}} years old</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"> gender:{{request.user.p_user.gender}}</li>
+              <li class="list-group-item"> email: {{request.user.email}}</li>
+              <li class="list-group-item">phone: {{request.user.p_user.phone}}</li>
+            </ul>
+            <!-- <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div> -->
+          </div>
+    
+       {%endif%}
+    </div>
+       <div class="col-4" style="border-left:2px solid black;height: 650px;">
+        {% if request.user.p_user %}
+        <a href="{% url 'edit' request.user.p_user.id%}" class="btn btn-info">Edit Profile</a>
+        <a href="{% url 'cpass' %}" class="btn btn-info">Change Password</a>
+
+        {% else %}
+        <a href="{% url 'addpro' %}" class="btn btn-warning">Add Profile</a>
+
+        {% endif %}
+    </div>
+       </div>
+    {% endblock nav %}

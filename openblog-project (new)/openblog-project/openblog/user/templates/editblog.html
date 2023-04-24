@@ -1,0 +1,30 @@
+{%extends 'nav.html'%}
+{%block nav%}
+<h2 class="text-center text-danger bg-secondary">Edit Blog</h2>
+{% if messages %}
+      {% for i in messages %}
+       {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+       <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{i}}
+       </div>
+       {%endif%}
+       {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+       <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{i}}
+       </div>
+        {%endif%}
+       {%endfor%}
+      {%endif%}
+<form action="" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+    <table class="table table-dark"></table>
+      {{form.as_table}}
+      <tr>
+        <td class="text_center" colspan="2">
+            <button class="btn btn-success">UpdateBlog</button>
+        </td>
+      </tr>
+</form>
+{%endblock nav%}
